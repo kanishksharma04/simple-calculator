@@ -63,3 +63,47 @@ body {
 .btn:active {
   transform: scale(0.94);
 }
+
+.btn.operator {
+  background: #3a3550;
+  color: #c9b6ff;
+}
+
+.btn.operator:hover {
+  background: #443d63;
+}
+
+.btn.function {
+  background: #4a2f38;
+  color: #ff9eb0;
+}
+
+.btn.function:hover {
+  background: #593642;
+}
+
+.btn.equals {
+  background: #6c4fd6;
+  color: #fff;
+  grid-row: span 2;
+}
+
+.btn.equals:hover {
+  background: #7c5eea;
+}
+
+.btn.zero {
+  grid-column: span 2;
+}
+
+@media (max-width: 380px) {
+  .display {
+    font-size: 2rem;
+    padding: 22px 14px;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+    padding: 14px 0;
+  }
+}
