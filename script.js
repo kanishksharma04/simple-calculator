@@ -44,3 +44,54 @@ function clearAll() {
   operator = null;
   resetOnNextInput = false;
 }
+
+function chooseOperator(nextOperator) {
+  if (currentInput === "Error") return;
+
+  // Chain calculations: if an operator is already pending, resolve it first
+  if (operator !== null && !resetOnNextInput) {
+    calculate();
+  }
+
+  previousInput = currentInput;
+  operator = nextOperator;
+  resetOnNextInput = true;
+}
+
+function calculate() {
+  if (operator === null || previousInput === null) return;
+
+  const a = parseFloat(previousInput);
+  const b = parseFloat(currentInput);
+  let result;
+
+  switch (operator) {
+    case "+":
+      result = a + b;
+      break;
+    case "-":
+      result = a - b;
+      break;
+    case "*":
+      result = a * b;
+      break;
+    case "/":
+      if (b === 0) {
+        currentInput = "Error";
+        operator = null;
+        previousInput = null;
+        resetOnNextInput = true;
+        return;
+      }
+      result = a / b;
+      break;
+    default:
+      return;
+  }
+
+  // Trim floating point noise (e.g. 0.1 + 0.2)
+  currentInput = String(Math.round(result * 1e10) / 1e10);
+  operator = null;
+  previousInput = null;
+  resetOnNextInput = true;
+}
