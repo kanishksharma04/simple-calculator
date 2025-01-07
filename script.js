@@ -9,3 +9,38 @@ const display = document.getElementById("display");
 function updateDisplay() {
   display.textContent = currentInput;
 }
+
+function inputNumber(digit) {
+  if (currentInput === "Error" || resetOnNextInput) {
+    currentInput = digit;
+    resetOnNextInput = false;
+    return;
+  }
+  currentInput = currentInput === "0" ? digit : currentInput + digit;
+}
+
+function inputDecimal() {
+  if (currentInput === "Error" || resetOnNextInput) {
+    currentInput = "0.";
+    resetOnNextInput = false;
+    return;
+  }
+  if (!currentInput.includes(".")) {
+    currentInput += ".";
+  }
+}
+
+function deleteLast() {
+  if (currentInput === "Error" || resetOnNextInput) {
+    clearAll();
+    return;
+  }
+  currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0";
+}
+
+function clearAll() {
+  currentInput = "0";
+  previousInput = null;
+  operator = null;
+  resetOnNextInput = false;
+}
