@@ -95,3 +95,55 @@ function calculate() {
   previousInput = null;
   resetOnNextInput = true;
 }
+
+function handleAction(action, value) {
+  switch (action) {
+    case "number":
+      inputNumber(value);
+      break;
+    case "decimal":
+      inputDecimal();
+      break;
+    case "operator":
+      chooseOperator(value);
+      break;
+    case "equals":
+      calculate();
+      break;
+    case "clear":
+      clearAll();
+      break;
+    case "delete":
+      deleteLast();
+      break;
+  }
+  updateDisplay();
+}
+
+// Wire up button clicks
+document.querySelectorAll(".btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const { action, value } = button.dataset;
+    handleAction(action, value);
+  });
+});
+
+// Keyboard support
+window.addEventListener("keydown", (e) => {
+  if (e.key >= "0" && e.key <= "9") {
+    handleAction("number", e.key);
+  } else if (e.key === ".") {
+    handleAction("decimal");
+  } else if (["+", "-", "*", "/"].includes(e.key)) {
+    handleAction("operator", e.key);
+  } else if (e.key === "Enter" || e.key === "=") {
+    e.preventDefault();
+    handleAction("equals");
+  } else if (e.key === "Escape") {
+    handleAction("clear");
+  } else if (e.key === "Backspace") {
+    handleAction("delete");
+  }
+});
+
+updateDisplay();
