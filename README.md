@@ -2,6 +2,10 @@
 
 A lightweight, dependency-free calculator built with plain HTML, CSS, and JavaScript.
 
+## Live Demo
+
+[https://kanishksharma04.github.io/simple-calculator/](https://kanishksharma04.github.io/simple-calculator/)
+
 ## Scope
 
 - Basic arithmetic: addition, subtraction, multiplication, division
